@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Philatelists Payment</title>
+    <style>
+        
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.payment-section {
+    display: flex;
+    justify-content: space-between;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    width: 100%;
+}
+
+.company-info {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.company-info .logo {
+    width: 100px;
+    height: auto;
+}
+h2, h3 {
+    color: #333;
+}
+p {
+    margin: 15px 0;
+    color: #666;
+}
+
+.share a img {
+    width: 30px;
+    margin: 0 10px;
+}
+.contact {
+    margin-top: 20px;
+}
+.terms {
+    font-size: 12px;
+    color: #999;
+    margin-top: 20px;
+}
+
+.payment-form {
+    flex: 1;
+    margin-left: 20px;
+}
+
+.payment-form h3 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.payment-form form {
+    display: flex;
+    flex-direction: column;
+}
+/* Form labels and inputs */
+.payment-form label {
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.payment-form input {
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.payment-form button {
+    background-color: #e91e63;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.payment-form button:hover {
+    background-color: #d81b60;
+}
+
+/* Payment methods section */
+.payment-methods {
+    margin-top: 20px;
+}
+
+.payment-methods img {
+    width: 50px;
+    margin-right: 10px;
+}
+
+/* Tablet view */
+@media only screen and (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .payment-section {
+        flex-direction: column;
+    }
+
+    .company-info, .payment-form {
+        margin: 0;
+    }
+
+    .payment-form {
+        margin-top: 20px;
+    }
+}
+
+
+@media only screen and (max-width: 768px) {
+    .payment-form h3 {
+        font-size: 18px;
+    }
+    .payment-form input, .payment-form button {
+        font-size: 14px;
+        padding: 8px;
+    }
+    .payment-methods img {
+        width: 40px;
+    }
+    .container {
+        width: 95%;
+        margin: 10px auto;
+    }
+    .share a img {
+        width: 25px;
+    }
+}
+
+    </style>
+    <!-- Include Razorpay Checkout JS -->
+    
+</head>
+<body>
+    {%load static%}
+    <div class="container">
+        {% csrf_token %}
+        <div class="payment-section">
+            <div class="company-info">
+                <img src="{% static 'logo.png'%}" alt="Philatelists" class="logo">
+                <h2>PHILATELISTS</h2>
+                <h3>Payment</h3>
+                <p>
+                    Philatelists is a leading platform for stamp collectors across the world. Our services make it easy to buy, sell, and exchange stamps securely. We are dedicated to delivering the best experience for all collectors.
+                </p>
+                <div class="share">
+                    <p>Share this on:</p>
+                    <a href="#"><img src="{% static 'facebook.png'%}" alt="Facebook"></a>
+                    <a href="#"><img src="{%static 'x_logo.png'%}" alt="X (Twitter)"></a>
+                    <a href="#"><img src="{%static 'whatsapp1.png'%}" alt="WhatsApp"></a>
+                </div>
+                <div class="contact">
+                    <p><strong>Contact Us:</strong></p>
+                    <p>Email: support@philateLists.com</p>
+                    <p>Phone: +1234567890</p>
+                </div>
+                <p class="terms">
+                    By using Philatelists, you accept all terms and conditions related to your payment. We operate to make your stamp collecting journey seamless and enjoyable.
+                </p>
+            </div>
+            <div class="payment-form">
+                <h3>Payment Details</h3>
+                <form id="payment-form" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" id="pay-button">Pay</button>
+                </form>
+                <div class="payment-methods">
+                    <img src="{%static 'upi.png'%}" alt="UPI">
+                    <img src="{%static 'visa - Copy.png'%}" alt="Visa">
+                    <img src="{%static 'Rupay.png'%}" alt="RuPay">
+                    <img src="{%static 'mastercard - Copy.png'%}" alt="Mastercard">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+        <!-- Razorpay Checkout Script -->
+    <script>
+        document.getElementById('pay-button').onclick = function(e) {
+            var options = {
+                "key": "{{ razorpay_key }}", // Enter the Key ID generated from the Dashboard
+                "amount": "{{ amount }}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 means 50000 paise or ₹500.
+                "currency": "{{ currency }}",
+                "name": "Philatelists",
+                "description": "Test Transaction",
+                "image": "https://example.com/your_logo",
+                "order_id": "{{ order_id }}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                "handler": function (response){
+                    alert(response.razorpay_payment_id);
+                    alert(response.razorpay_order_id);
+                    alert(response.razorpay_signature);
+                    window.location.href = "{% url 'order_success' %}";
+                },
+                "prefill": {
+                    "name": "{{ form.full_name.value }}",
+                    "email": "{{ form.email.value }}",
+                    "contact": "{{ form.phone.value }}"
+                },
+                "notes": {
+                    "address": "Razorpay Corporate Office"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+            e.preventDefault();
+        }
+    </script>
+    </script>
+</body>
+</html>

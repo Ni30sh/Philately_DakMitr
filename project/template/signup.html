@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Page</title>
+    <link rel="stylesheet" href="signup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>body {
+        font-family: Arial, sans-serif;
+        background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj93-LRKya4bJ0lbNyRGHamYJLGwgF8RiYng&s);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    
+    .signup-container {
+        background-color: #e7e3e2af;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+    }
+    
+    h2 {
+        margin-bottom: 20px;
+    }
+    
+    .input-group {
+        margin-bottom: 20px;
+        text-align: left;
+    }
+    
+    .input-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    
+    .input-group input, 
+    .input-group select {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+    
+    .phone-container {
+        display: flex;
+        gap: 10px;
+    }
+    
+    #country-code {
+        width: 35%;
+    }
+    
+    .signup-btn {
+        width: 100%;
+        padding: 10px;
+        background-color: #768176;
+        color: #fdf9f9;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    
+    .social-login {
+        margin-top: 20px;
+    }
+    
+    .social-login p {
+        margin-bottom: 10px;
+        font-size: 14px;
+        color: #111111;
+    }
+    
+    .social-icons {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+    }
+    
+    .social-icon {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        color: #fff;
+        font-size: 24px;
+        line-height: 50px;
+        text-align: center;
+        transition: background-color 0.3s ease;
+    }
+    
+    .google {
+        background-color: #dd4b39;
+    }
+    
+    .facebook {
+        background-color: #3b5998;
+    }
+    
+    .microsoft {
+        background-color: #0078d4;
+    }
+    
+    .github {
+        background-color: #333;
+    }
+    
+    .linkedin {
+        background-color: #0077b5;
+    }
+    
+    .social-icon:hover {
+        opacity: 0.8;
+    }
+    
+    .login-option {
+        margin-top: 20px;
+    }
+    
+    .login-option p {
+        font-size: 14px;
+        color: #030303;
+    }
+    
+    .login-option a {
+        color: #fa0c0c;
+        text-decoration: none;
+    }
+    
+    .login-option a:hover {
+        text-decoration: underline;
+    }
+    </style>
+</head>
+<body>
+    {%load static%}
+    <div class="signup-container">
+        <h2>Create Account</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="input-group">
+                <label for="firstname">Firstname</label>
+                <input type="text" id="firstname" name="Firstname" placeholder="Enter your username" required>
+            </div>
+            <div class="input-group">
+                <label for="lastname">Lastname</label>
+                <input type="text" id="username" name="Lastname" placeholder="Enter your username" required>
+            </div>
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="Username" placeholder="Enter your username" required>
+            </div>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="Email" placeholder="Enter your email" required>
+            </div>
+            <div class="input-group">
+                <label for="phone">Phone Number</label>
+                <div class="phone-container">
+                    <select id="country-code" required>
+                        <option value="+1">+1 (US)</option>
+                        <option value="+44">+44 (UK)</option>
+                        <option value="+91">+91 (India)</option>
+                        <!-- Add more countries as needed -->
+                    </select>
+                    <input type="tel" id="phone" name="PhoneNumber" placeholder="Enter your phone number" required>
+                </div>
+            </div>
+           <!-- <div class="input-group">
+                <label for="gender">Gender</label>
+                <select id="gender" required>
+                    <option value="" disabled selected>Select your gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>-->
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="Password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="signup-btn">Sign Up</button>
+        </form>
+        <div class="social-login">
+            <p>Or sign up with</p>
+            <div class="social-icons">
+                
+                <a href="#" class="social-icon google"><i class="fab fa-google"></i></a>
+                <a href="#" class="social-icon microsoft"><i class="fab fa-windows"></i></a>
+                <a href="#" class="social-icon github"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-icon linkedin"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+        <div class="login-option">
+            <p>Already have an account? <a href="{% url 'login' %}"  target="_blank">Login here</a></p>
+        </div>
+    </div>
+</body>
+</html>

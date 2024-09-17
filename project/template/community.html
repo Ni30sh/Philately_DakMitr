@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Community</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        .album-list {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .album-item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin: 1rem;
+            padding: 1rem;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .album-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .stamp-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .stamp-item {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            text-align: center;
+            transition: background-color 0.2s;
+        }
+
+        .stamp-item:hover {
+            background-color: #e0e0e0;
+        }
+
+        .stamp-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+        }
+
+        h2, h3 {
+            margin: 0.5rem 0;
+        }
+
+        p {
+            margin: 0.5rem 0;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Our Community</h1>
+    </header>
+    <main>
+        <ul class="album-list">
+            {% for album in albums %}
+                <li class="album-item">
+                    <h2>{{ album.user.username }}'s Album</h2>
+                    <ul class="stamp-list">
+                        {% for stamp in album.stamps.all %}
+                            <li class="stamp-item">
+                                <h3>{{ stamp.name }}</h3>
+                                <img src="{{ stamp.image.url }}" alt="{{ stamp.name }}" class="stamp-image">
+                                <p>{{ stamp.description }}</p>
+                                <p>Year: {{ stamp.year }}</p>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    </main>
+</body>
+</html>

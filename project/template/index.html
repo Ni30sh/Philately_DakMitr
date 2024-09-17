@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Philately | stamps</title>
+
+   
+   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap');
+
+:root{
+    --green: var(--green);
+    --black:#130f40;
+    --light-color: #666;
+    --box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.1);
+    --border: 2rem solid rgba(0,0,0.1);
+    --outline:.1rem solid rgba(0,0,0.1);
+}
+*{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    transition: all .2s linear;
+}
+html{
+    font-size: 62.5%;
+    overflow-x:hidden;
+    scroll-behavior: smooth;
+    scroll-padding-top:7rem;   
+}
+body{
+    background: #eee;
+}
+
+section{
+    padding: 2rem 9%;
+}
+
+.heading{
+    text-align: center;
+    padding: 2rem 0;
+    padding-bottom: 3rem;
+    font-size: 3.5rem;
+    color: black;
+    text-decoration: underline;
+}
+
+
+
+.btn{
+    border: .2rem solid black ;
+    margin-top: 1rem;
+    display: inline-block;
+    padding: .8rem 3rem;
+    font-size: 1.7rem;
+    border-radius: .5rem;
+    cursor: pointer;
+    background: none;
+}
+
+.btn:hover{
+    background: olivedrab;
+}
+
+.header{
+    border: 0px solid;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 9%;
+    background: #fff;
+    box-shadow: var(--box-shadow);
+}
+
+.header .logo{
+    font-size: 2.5rem;
+    font-weight: bolder;
+}
+.header .navbar a{
+    font-size: 1.7rem;
+    margin: 0 1rem;
+    color: black;
+}
+.header .navbar a:hover
+{
+    color: olivedrab;
+}
+.header .icons div{
+    border: 0px solid;
+    height: 4.5rem;
+    width: 4.5rem;
+    line-height: 4.5rem;
+    border-radius: .5rem;
+    background: #eee;
+    color: black;
+    font-size: 2rem;
+    margin-right: .3rem;
+    text-align: center;
+    cursor: pointer;
+}
+.header .icons div:hover
+{
+    background: olivedrab;
+    color: white;
+}
+
+.header .search-form{
+    border: 0px solid;
+    position: absolute;
+    top: 110%;
+    right: -110%;
+    width: 50rem;
+    height: 4.5rem;
+    background: #fff;
+    border-radius: .5rem ;
+    overflow: hidden;
+    align-items: center;
+    box-shadow: var(--box-shadow);
+}
+
+.header .search-form.active
+{
+    right: 2rem;
+    transition: .4s linear;
+}
+
+.header .search-form input{
+    height: 100%;
+    width: 100%;
+    background: none;
+    text-transform: none;
+    font-size: 1.6rem;
+    color:black;
+    padding: 0 1.5rem;
+}
+.header .search-form label{
+    font-size: 2.2rem;
+    padding-right: 1.5rem;
+    color: black;
+    cursor: pointer;
+}
+.header .search-form label:hover{
+    color: olivedrab;
+}
+
+.header .shopping-cart
+{
+    border: px solid;
+    position: absolute;
+    top: 110%;
+    right: -110%;
+    padding: 1rem;
+    border-radius: .5rem;
+    box-shadow: var(--border);
+    width: 35rem;
+    background: white;
+}
+
+.header .shopping-cart.active{
+
+       right: 2rem;
+       transition: .4s linear;
+}
+
+.header .shopping-cart .box{
+    border: 0px solid blue;
+    display: flex;
+    align-items: centre;
+    gap: 1rem;
+    position: relative; 
+    margin: 1rem 0;
+}
+
+.header .shopping-cart .box img
+{
+    height: 10rem;
+
+}
+.header .shopping-cart .box .bxs-trash
+{
+    font-size: 2rem;
+    position: absolute;
+    top: 50%;
+    right: 2rem;
+    cursor: pointer;
+    transform: translateY(-50%);
+}
+
+.header .shopping-cart .box .bxs-trash:hover{
+
+    color: olivedrab;
+}
+
+.header .shopping-cart .box .content h3{
+    color: black;
+    font-size: 1.7rem;
+    padding-bottom:1rem;
+}
+
+.header .shopping-cart .box .content span{
+    color: gray;
+    font-size: 1.6rem;
+}
+.header .shopping-cart .box .content .quantity{
+     padding-left: 1rem;
+}
+
+.header .shopping-cart .total
+{
+    font-size: 2.5rem;
+    padding: 1rem 0;
+    text-align: center;
+    color: black;
+}
+
+.header .shopping-cart .btn{
+    display: block;
+    text-align: centre;
+    margin: 1rem 0;
+}
+
+
+.header .login-form{
+    border: 0px solid;
+    position: absolute;
+    width: 35rem;
+    top: 110% ;
+    right: -110%;
+    box-shadow: var(--box-shadow);
+    padding: 2rem;
+    border-radius: .5rem;
+    background: white;
+    text-align: center; 
+}
+
+.header .login-form.active{
+    right: 2rem;
+    transition: .4s;
+
+}
+
+.header .login-form h3{
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    color: black;
+}
+
+.header .login-form .box{
+    width: 100%;
+    border: 0px solid;
+    margin: .7rem 0;
+    background: #eee;
+    border-radius: .5rem;
+    padding: 1rem;
+    font-size: 1.6rem;
+    color: black;
+    text-transform: none;
+}
+
+.header .login-form p
+{
+    font-size: 1.4rem;
+    padding: .5rem;
+    color: grey;
+}
+
+.header .login-form p a{
+   text-decoration: underline;
+    color: olive;
+}
+
+.home{
+    border: 0px solid;
+    display: flex;
+    justify-content: center;
+    background: url(/static/A.jpg) no-repeat;
+    background-position: center;
+    background-size: cover;
+    padding-top: 17rem;
+    padding-bottom: 10rem;
+}
+.home.content{
+    border: 0px solid;
+    text-align: center;
+    width: 60rem;
+}
+.home .content h3{
+    color: rgb(2, 2, 29);
+    font-size: 2.5rem;
+}
+.home .content h3 span
+{
+    color: rgb(139, 6, 6);
+}
+
+
+.categories .circle-image-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+.circle{
+    text-align: center;
+    padding: 10px;
+}
+.circle img{
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    border-radius: 50%;
+}
+
+.categories .circle-image-container .circle:hover{
+     filter: drop-shadow(1px 1px 20px olivedrab);
+     border-radius: 50%;
+}
+
+.categories .circle-image-container .circle h3{
+    font-size: 2rem;
+    
+}
+
+footer {
+    background-color: black;
+    color: white;
+    padding: 20px;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .col-md-3 {
+    flex: 0 0 25%;
+    padding: 10px;
+  }
+  
+  h3 {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  p {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  
+  .app-icons img {
+    width: 100px;
+    height: auto;
+    margin-right: 10px;
+    
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    margin-bottom: 5px;
+  }
+  
+  .container .col-md-3 a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .social-icons li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .social-icons i {
+    font-size: 20px;
+    color: white;
+  }
+  
+  .copyright {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+   </style>
+
+</head>
+<body>
+  {%load static%}
+  
+    <header class="header">
+        <a href="#" class="logo">डाक मित्र</a>
+        <nav class="navbar">
+            
+            <a href="#">About</a>
+            <a href="{% url 'contact' %}">Contact Us</a>
+            <a href="#">Team</a>
+            <a href="{% url 'community' %}">Our Community</a>
+            <a href="{% url 'signup' %}"><div class="bx bx-user-circle" id="login-btn"></div></a>
+          
+  
+        </nav>
+    </header>
+           
+        <form class="search-form">
+            <input type="search" id="search-box" placeholder="search here">
+            <label for="search-box" class="bx bx-search"></label>
+        </form>
+
+
+     
+
+      <!--<form method="POST" class="login-form">
+        <h3>Login Now</h3>
+        <input type="username" placeholder="enter you username" class="box">
+        <input type="password" placeholder="enter your password" class="box">
+         
+        <p> Forget Your password? <a href="#">Click Here</a></p>
+        <p> Don't Have An Account? <a href="{% url 'signup' %}">Create Now</a></p>
+        <input type="submit" value="login Now" class="btn">
+      </form>-->
+
+    </header>
+
+     
+     <section class="home" id="home">
+        <div class="content">
+            <h3>Welcome to <span>डाक मित्र </span>,</h3>
+            <h3>fastest growing community</h3> 
+            <h3>for Philatelists</h3>
+        </div>
+
+     </section>
+
+
+     <section class="categories" id="categories">
+        <h1 class="heading">Our Categories</h1>
+
+        <div class="circle-image-container">
+          <div class="circle">
+            <img src="{%static 'stamps.jpg' %}" width="200px" height="200px">
+            <h3>Stamps</h3>
+            <p>3000 items</p>
+          </div>
+
+          <div class="circle-image-container">
+            <div class="circle">
+              <img src="{% static 'coins.jpg' %}" width="200px" height="200px">
+              <h3>Coins</h3>
+            </div>
+          </div>
+
+            <div class="circle-image-container">
+                <div class="circle">
+                  <img src="{%static 'postcards.jpg'%}" width="200px" height="200px">
+                  <h3>Postcards</h3>
+                </div>
+            </div>
+
+            <div class="circle-image-container">
+                <div class="circle">
+                  <img src="{%static 'photgraphy.png'%}" width="200px" height="200px">
+                  <h3>Photography</h3>
+                </div>
+            </div>
+
+            <div class="circle-image-container">
+                <div class="circle">
+                  <img src="{%static 'magzines.jpg'%}" width="200px" height="200px">
+                  <h3>Magzines</h3>
+                </div>
+            </div>
+
+        </div>
+
+     </section>
+
+
+     
+     <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <h3>About Us</h3>
+            <p>Our platform is dedicated to promoting and celebrating philately,
+               the art and study of postage stamps and related materials. We believe
+               that every stamp tells a story – of culture, history, and 
+               creativity. With the evolving challenges in accessing philatelic 
+               materials across different postal circles, we aim to make philately
+               more accessible for collectors across India. Our centralized platform 
+               connects philatelists with a wide range of stamps and resources, all in one place.</p>
+            
+          </div>
+          <div class="col-md-3">
+            <h3>Useful Links</h3>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Products</a></li>
+              <li><a href="#">Contact us</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3">   
+    
+            <h3>Follow Us</h3>
+            
+            <ul class="social-icons">
+              <li><a href="#"><i class='bx bxl-facebook-circle'></i> </a></li>
+              <li><a href="#"><i class='bx bxl-instagram' ></i></a></li>
+              <li><a href="#"><i class='bx bxl-youtube' ></i></a></li>
+              <li><a href="#"><i class='bx bxl-twitter' ></i></a></li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <h3>Our Purpose</h3>
+            <p>The purpose of our platform is simple - to bridge the gap between philatelists and the philatelic material released across various postal circles in India. By offering a centralized hub for accessing, ordering, and learning about stamps and cancellations, we aim to:
+
+              Expand access to stamps and related materials nationwide.
+              
+              Simplify the process of acquiring philatelic items.
+              
+              Support collectors in building and preserving their collections, fostering a community of like-minded enthusiasts.</p>
+          </div>
+        </div>
+        <div class="copyright">
+          <p>Copyright 2024</p>
+        </div>
+      </div>
+    </footer>
+
+
+    <script> 
+        let searchForm = document.querySelector('.search-form')
+
+document.querySelector('#search-btn').onclick = () =>
+{
+    searchForm.classList.toggle('active');
+
+    shoppingCart.classList.remove('active');
+    loginForm.classList.remove('active');
+}
+
+let shoppingCart = document.querySelector('.shopping-cart')
+
+document.querySelector('#cart-btn').onclick = () =>
+{
+    shoppingCart.classList.toggle('active');
+
+    searchForm.classList.remove('active');
+    loginForm.classList.remove('active');
+}
+
+let  loginForm= document.querySelector('.login-form')
+
+document.querySelector('#login-btn').onclick = () =>
+{
+    loginForm.classList.toggle('active');
+
+    searchForm.classList.remove('active');
+    shoppingCart.classList.remove('active');
+}
+
+window.onscroll = () =>
+{
+    searchForm.classList.remove('active');
+    shoppingCart.classList.remove('active');
+    loginForm.classList.remove('active');
+}
+
+
+    </script>
+</body>
+</html>

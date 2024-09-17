@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Order</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            background-color: #004494;
+        }
+
+        main {
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .product-image {
+            width: 25%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        form {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 1rem;
+            display: inline-block;
+            text-align: left;
+            vertical-align: top;
+            margin-left: 2rem;
+        }
+
+        .submit-button {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: #28a745;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            margin-top: 1rem;
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            background-color: #218838;
+        }
+    </style>
+    <script>
+        function downloadImage() {
+            const imageUrl = document.querySelector('.product-image').src;
+            const link = document.createElement('a');
+            link.href = imageUrl;
+            link.download = '{{ product.name }}.jpg';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            downloadImage();
+            event.target.submit();
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1> Place Order "{{ product.name }}"</h1>
+        <nav>
+         
+            <a href="{% url 'album' %}">Our Community</a>
+            <a href="{% url 'logout' %}" class="logout-button">Logout</a>
+        </nav>
+    </header>
+    <main>
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+        <form method="post" onsubmit="handleSubmit(event)">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="submit-button">Proceed</button>
+        </form>
+    </main>
+</body>
+</html>

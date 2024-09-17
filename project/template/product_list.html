@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            background-color: #004494;
+        }
+
+        .logout-button {
+            background-color: #dc3545;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .logout-button:hover {
+            background-color: #c82333;
+        }
+
+        main {
+            padding: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .product-item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 1rem 0;
+            padding: 1rem;
+            text-align: center;
+            flex: 0 0 30%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .buy-button {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: #28a745;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 1rem;
+        }
+
+        .buy-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    {% csrf_token %}
+    <header>
+        <h1>Product List</h1>
+        <nav>
+            
+            <a href="{% url 'contact' %}">Contact Us</a>
+            <a href="#">Team</a>
+            <a href="{% url 'album' %}">Our Community</a>
+            <a href="{% url 'logout' %}" class="logout-button">Logout</a>
+        </nav>
+    </header>
+    <main>
+        <ul class="product-list">
+            {% for product in products %}
+                <li class="product-item">
+                    <h2>{{ product.name }}</h2>
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+                    <p class="product-price">Price: ₹{{ product.price }}/-</p>
+                    <a href="{% url 'place_order' product.id %}" class="buy-button">Buy</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </main>
+</body>
+</html>
