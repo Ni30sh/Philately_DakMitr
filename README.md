@@ -1,4 +1,4 @@
 # Philately SIH 2024
 ADD YOUR_RAZORPAY_KEY_ID and
 YOUR_RAZORPAY_KEY_SECRET 
-Then Perform Payment
+Then Perform Payment (Setting.py)
